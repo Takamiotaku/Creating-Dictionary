@@ -1,85 +1,31 @@
-import time 
 import sys
+import itertools
 
-Flag = False
-Arguments = ["-h","-v","word1"]
+Aarguments = ["-v","-h","-p","-d"]
+ListofChars = []
+Commands = []
 Keywords = []
+Arg = sys.argv[:]
+Arg = Arg[1:]
+for i in Arg:
+    if i in Aarguments:
+        Commands.append(i)
+for i in Arg:
+    if i not in Aarguments:
+        Keywords.append(i)
+Name = Keywords[0]
+Keywords = Keywords[1:]
 
-def __main__(*argv):
-    print("Place Holder") #######################################################################
-    
-   
+#print(Keywords)
+#print(Commands)
+if Arg[0] not in Aarguments:
+    print("Starting Producing a dictionary of words", Keywords , "and saving them in file",Name)
+    for string in Keywords:
+        ListofChars.extend(list(string))
+    combos = itertools.product(ListofChars, repeat=len(ListofChars))
+    with open(Name+".txt", 'w') as f:
+        for combo in combos:
+            f.write(''.join(combo) + '\n')
+print("finished")
 
-def __counting__(Arguments):
-    global Keywords
-    num = len(Arguments)
-    print("Place Holder") #######################################################################
-    for i in range (num):
-        Keywords[i] =  __detect__(Arguments[i])
-        
-
-
-#Function dectecs if 
-def __detect__(Temp):
-    global Flag
-    for i in range(len(Arguments)):
-        if Temp == Arguments[i]:
-            print("Flag is true")
-            Flag = True
-            return Arguments[i]
-        
-    if Flag == False:
-        print("Flag is false")
-        return Temp
-    
-
-def __create__ (*arg):
-    print(arg)
-    
-def __commands__ (com):
-    #print("comands" + com )
-    match com:
-        case "-v":
-            __version__()
-        case "-h":
-            __help__()
-        case "-b":
-            __block__()
-
-def __version__ ():
-    print("version")    
-
-def __help__():
-    print("help page")
-
-def __block__():
-    print("block")
-
-
-def __Temp__():
-    print("x")
- #print ("Number of arguments: ", len(sys.argv))
-    if len(sys.argv) == 1:
-        print("Invalid amout of arguments: try -h")
-    if len(sys.argv) == 2:
-        print(sys.argv[1])
-        choice = __detect__(sys.argv[1])
-        #print("2") 1 is script 2 is arg
-        if Flag == True: #commamd
-            __commands__(__detect__(choice))
-        if Flag == False: #keyword
-             __create__(__detect__(choice))
-    if len(sys.argv) ==3:
-        choice = __detect__(sys.argv[2])
-        if Flag == True: #command
-            print("command")
-        if Flag == False: # keyword
-            print("keyword")
-    else:
-        print("more then 2")
-
-def newfunction()
-__main__()
-
-#test for git
 
